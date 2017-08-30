@@ -3,7 +3,7 @@ npm install
 
 ### 运行
 
-node app.js
+npm start
 
 ### 简介
 多人聊天测试项目
