@@ -12,6 +12,7 @@
   <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
+<%- include nav.ejs %>
 <div class="container summary">
   <%- include alert.ejs %>
   <% if(!nick){ %>
@@ -50,6 +51,11 @@
     </div>
   <% } %>
 </div>
+
+<!--返回顶部按钮-->
+<a class="back-top" href="#">
+  <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+</a>
 </body>
 <!--jq-->
 <script type="text/javascript" src="/lib/js/jquery-1.11.1.min.js"></script>
@@ -61,6 +67,7 @@
 <script type="text/javascript" src="/emoji/js/jquery.mousewheel-3.0.6.min.js"></script>
 <script type="text/javascript" src="/emoji/js/jquery.mCustomScrollbar.min.js"></script>
 <script type="text/javascript" src="/emoji/js/jquery.emoji.js"></script>
+<script type="text/javascript" src="/javascripts/index.js"></script>
 <script type="text/javascript">
   //emoji表情
   $("#editor").emoji({

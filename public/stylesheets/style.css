@@ -1,43 +1,92 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #f3f3f3;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    /*解决模态框左右抖动问题*/
+    overflow: auto !important;
+    background-color: #f3f3f3;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.summary{
-  padding-top: 30px;
-  padding-left: 0;
-  padding-right: 0;overflow-x: hidden;
+.summary {
+    padding-top: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    overflow-x: hidden;
 }
 
-.my-jumbotron{
-  background-color: #aaa;
+.my-sup{
+    padding: 1px 2px;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    white-space: nowrap;
+    border-radius: .25em;
+    background-color: #d9534f;
+    vertical-align: super;
 }
 
-.editor-div{
-  min-height: 34px;
-  height: auto;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-  color: #555;
-  display: block;
-  font-size: 14px;
-  line-height: 1.42857;
-  padding: 6px 12px;
-  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-  width: 100%;
+.my-jumbotron {
+    background: url("http://www.mwyking.com:8888/img/bg001.jpg") no-repeat;
+    -webkit-background-size:cover;
+    background-size:cover;
+}
+
+.editor-div {
+    min-height: 34px;
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
 }
 
 .editor-div:focus {
-  border-color: #66afe9;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
-  outline: 0 none;
+    border-color: #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
 }
 
-.editor-div img{
-  width: 20px;
-  height: 20px;
+.editor-div img {
+    width: 20px;
+    height: 20px;
 }
 
+/*返回顶部图标*/
+.back-top {
+    display: none;
+    z-index: 999999;
+    width: 45px;
+    height: 45px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #777;
+    color: #eee;
+    font-size: 24px;
+    line-height: 2;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    overflow: hidden;
+    border: none;
+    opacity: .8;
+}
+
+.back-top:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.back-top:active, .back-top:focus {
+    color: #fff;
+}
