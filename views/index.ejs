@@ -1,64 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/lib/css/bootstrap.min.css'/>
-  <link rel="stylesheet" href="/emoji/css/jquery.mCustomScrollbar.min.css"/>
-  <link rel='stylesheet' href='/emoji/css/jquery.emoji.css'/>
-  <link rel="stylesheet" href="/emoji/css/railscasts.css"/>
-  <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title><%= title %></title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel='stylesheet' href='/lib/css/bootstrap.min.css'/>
+    <link rel="stylesheet" href="/emoji/css/jquery.mCustomScrollbar.min.css"/>
+    <link rel='stylesheet' href='/emoji/css/jquery.emoji.css'/>
+    <link rel="stylesheet" href="/emoji/css/railscasts.css"/>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
 <%- include nav.ejs %>
 <div class="container summary">
-  <%- include alert.ejs %>
-  <% if(!nick){ %>
+    <%- include alert.ejs %>
+    <% if(!nick){ %>
     <div class="jumbotron my-jumbotron">
-      <h1>Welcome to chat</h1>
-      <p>提示：目前没有搭建数据库，聊天数据不会保存。</p>
-      <p>提示：昵称24小时内可用。</p>
-      <form method="post">
-        <div class="form-group">
-          <label for="usernick">起一个昵称吧？</label>
-          <div class="row">
-            <div class="col-md-3">
-              <input type="text" class="form-control" id="usernick"  name="nick" placeholder="不超过16个字符" maxlength="16" autocomplete="off">
+        <h1>Welcome to chat</h1>
+        <p>提示：目前没有搭建数据库，聊天数据不会保存。</p>
+        <p>提示：昵称24小时内可用。</p>
+        <form method="post">
+            <div class="form-group">
+                <label for="usernick">起一个昵称吧？</label>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="usernick" name="nick" placeholder="不超过16个字符"
+                               maxlength="16" autocomplete="off">
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-danger">开始聊天</button>
-      </form>
+            <button type="submit" class="btn btn-danger">开始聊天</button>
+        </form>
     </div>
-  <% }else{ %>
+    <% }else{ %>
     <div class="container summary">
-      <div class="row">
-        <div class="col-md-12">
-          <p id="timeshow"></p>
-          <p>
-            <span>您当前的昵称是：<span id="nickshow" style="color:#eb7350"><%= nick%></span></span>
-            <a href="/logout" style="margin-left: 10px">注销</a>
-          </p>
-          <div class="input-group" style="margin-bottom: 10px">
-            <div id="editor" class="editor-div" contenteditable="true"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <p id="timeshow"></p>
+                <p>
+                    <span>您当前的昵称是：<span id="nickshow" style="color:#eb7350"><%= nick %></span></span>
+                    <a href="/logout" style="margin-left: 10px">注销</a>
+                </p>
+                <div class="input-group" style="margin-bottom: 10px">
+                    <div id="editor" class="editor-div" contenteditable="true"></div>
             <span class="input-group-btn">
                 <button class="btn btn-primary" type="button" onclick="sendMsg()">发送</button>
             </span>
-          </div><!-- /input-group -->
-          <button id="icon-btn" class="btn btn-danger">表情</button>
-        </div><!-- /.col-lg-6 -->
-      </div><!-- /.row -->
-      <div id="ultext">
-      </div>
+                </div><!-- /input-group -->
+                <button id="icon-btn" class="btn btn-danger">表情</button>
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+        <div id="ultext">
+        </div>
     </div>
-  <% } %>
+    <% } %>
 </div>
 <%- include footer.ejs %>
 <!--返回顶部按钮-->
 <a class="back-top" href="#">
-  <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
 </a>
 </body>
 <!--jq-->
@@ -66,97 +68,100 @@
 <!--bootstrap-->
 <script type="text/javascript" src="/lib/js/bootstrap.min.js"></script>
 <!--socket.io-->
-<script type="text/javascript" src="/lib/js/socket.io.min.js"></script>
+<script type="text/javascript" src="/lib/socketio/socket.io.min.js"></script>
+<!--favico-->
+<!--<script type="text/javascript" src="/javascripts/favico.js"></script>-->
 <!--about emoji-->
 <script type="text/javascript" src="/emoji/js/jquery.mousewheel-3.0.6.min.js"></script>
 <script type="text/javascript" src="/emoji/js/jquery.mCustomScrollbar.min.js"></script>
 <script type="text/javascript" src="/emoji/js/jquery.emoji.js"></script>
 <script type="text/javascript" src="/javascripts/index.js"></script>
 <script type="text/javascript">
-  //emoji表情
-  $("#editor").emoji({
-    button: "#icon-btn",
-    showTab: true,
-    animation: 'slide',
-    icons: [{
-      name: "QQ表情",
-      path: "images/emoji/qq/",
-      maxNum: 91,
-      file: ".gif"
-    },{
-      name: "静态表情",
-      path: "images/emoji/tieba/",
-      maxNum: 50,
-      file: ".jpg"
-    }]
-  });
+    //emoji表情
+    $("#editor").emoji({
+        button: "#icon-btn",
+        showTab: true,
+        animation: 'slide',
+        icons: [{
+            name: "QQ表情",
+            path: "images/emoji/qq/",
+            maxNum: 91,
+            file: ".gif"
+        }, {
+            name: "静态表情",
+            path: "images/emoji/tieba/",
+            maxNum: 50,
+            file: ".jpg"
+        }]
+    });
 
-  function format(txt) {
-    txt = "" + txt;
-    if (txt.length === 1)
-      txt = "0" + txt;
-    return txt;
-  }
+    function format(txt) {
+        txt = "" + txt;
+        if (txt.length === 1)
+            txt = "0" + txt;
+        return txt;
+    }
 
-  //获取时间
-  function ShowTime() {
-    var date = new Date(),
-            nowYear = date.getFullYear(),
-            nowMonth = date.getMonth() + 1,
-            nowDay = date.getDate(),
-            nowHour = date.getHours(),
-            nowMinute = date.getMinutes(),
-            nowSecond = date.getSeconds(),
-            weekday = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
-            nowWeek = weekday[date.getDay()];
-    //格式化
-    nowHour = format(nowHour);
-    nowMinute = format(nowMinute);
-    nowSecond = format(nowSecond);
-    return nowYear + '-' + nowMonth + '-' + nowDay + ' ' + nowHour + ':' + nowMinute + ':' + nowSecond + ' ' + nowWeek;
-  }
+    //获取时间
+    function ShowTime() {
+        var date = new Date(),
+                nowYear = date.getFullYear(),
+                nowMonth = date.getMonth() + 1,
+                nowDay = date.getDate(),
+                nowHour = date.getHours(),
+                nowMinute = date.getMinutes(),
+                nowSecond = date.getSeconds(),
+                weekday = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+                nowWeek = weekday[date.getDay()];
+        //格式化
+        nowHour = format(nowHour);
+        nowMinute = format(nowMinute);
+        nowSecond = format(nowSecond);
+        return nowYear + '-' + nowMonth + '-' + nowDay + ' ' + nowHour + ':' + nowMinute + ':' + nowSecond + ' ' + nowWeek;
+    }
 
-  $("#timeshow").html(ShowTime());
-  setInterval(function(){
     $("#timeshow").html(ShowTime());
-  },1000);
+    setInterval(function () {
+        $("#timeshow").html(ShowTime());
+    }, 1000);
 
-  var socket = io();
-  function sendMsg(){
-    var msg = $("#editor").html();
-    //前台输入的消息
-    //console.log(msg)
-    var msginof = {
-      user:$("#nickshow").html(),
-      con:msg,
-      time:ShowTime()
+    var socket = io();
+    function sendMsg() {
+        var msg = $("#editor").html();
+        //前台输入的消息
+        //console.log(msg)
+        var msginof = {
+            user: $("#nickshow").html(),
+            con: msg,
+            time: ShowTime()
+        }
+        if (msginof.con == "") {
+            alert("说点啥？")
+        } else {
+            socket.emit('click1', msginof);
+            $("#editor").html("");
+        }
     }
-    if (msginof.con == ""){
-      alert("说点啥？")
-    }else {
-      socket.emit('click1',msginof);
-      $("#editor").html("");
-    }
-  }
 
-  //监听click2事件
-  socket.on('click2', function(data){
-    var user = data.datas.user;
-    var content = data.datas.con;
-    var time = data.datas.time;
-    var msgListHtml = "";
-    msgListHtml += '<div class="panel panel-default">';
-    msgListHtml += '<div class="panel-body clearfix">';
-    msgListHtml +=  '<div class="">';
-    msgListHtml += '<p>';
-    msgListHtml += '<span class="glyphicon glyphicon-user" aria-hidden="true" style="color: #eb7350"></span><span>' +user+ '说：</span>';
-    msgListHtml += '<span>' +content+ '</span>';
-    msgListHtml += '</p>';
-    msgListHtml += '</div>';
-    msgListHtml +=  '<div class=""><span class="glyphicon glyphicon-time" aria-hidden="true" style="color: #4c8bf5"></span><span style="color: #888">' +time+ '</span></div>';
-    msgListHtml += '</div>';
-    msgListHtml += '</div>';
-    $('#ultext').append(msgListHtml);
-  });
+
+    //监听click2事件
+    socket.on('click2', function (data) {
+        var user = data.datas.user;
+        var content = data.datas.con;
+        var time = data.datas.time;
+        var msgListHtml = "";
+        msgListHtml += '<div class="panel panel-default">';
+        msgListHtml += '<div class="panel-body clearfix">';
+        msgListHtml += '<div class="">';
+        msgListHtml += '<p>';
+        msgListHtml += '<span class="glyphicon glyphicon-user" aria-hidden="true" style="color: #eb7350"></span><span>' + user + '说：</span>';
+        msgListHtml += '<span>' + content + '</span>';
+        msgListHtml += '</p>';
+        msgListHtml += '</div>';
+        msgListHtml += '<div class=""><span class="glyphicon glyphicon-time" aria-hidden="true" style="color: #4c8bf5"></span><span style="color: #888">' + time + '</span></div>';
+        msgListHtml += '</div>';
+        msgListHtml += '</div>';
+        $('#ultext').append(msgListHtml);
+    });
 </script>
 </html>
