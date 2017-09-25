@@ -1,6 +1,5 @@
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
     /*解决模态框左右抖动问题*/
     overflow: auto !important;
     background-color: #f3f3f3;
