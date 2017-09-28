@@ -36,3 +36,19 @@
 .my-navbar-brand .logo {
     width: 40px;
 }
+
+.search-box {
+    width: 100% !important;
+    padding-right: 20px;
+}
+
+.search-btn {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    color: #4c8bf5;
+}

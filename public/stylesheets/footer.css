@@ -1,13 +1,31 @@
-.footer{
-    width: 100%;
-    margin-top: 15px;
-    background: #fff;
+/*返回顶部图标*/
+.back-top {
+    display: none;
+    z-index: 999999;
+    width: 45px;
+    height: 45px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #777;
+    color: #eee;
+    font-size: 24px;
+    line-height: 2;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    overflow: hidden;
+    border: none;
+    opacity: .8;
 }
 
-.copyright{
-    padding-top: 12px;
-    font-size: 12px;
-    text-align: center;
-    color: #555555;
-    border-top: 1px solid #eaeaea;
+.back-top:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.back-top:active, .back-top:focus {
+    color: #fff;
 }

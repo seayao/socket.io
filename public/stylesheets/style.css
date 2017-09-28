@@ -24,10 +24,18 @@ body {
     vertical-align: super;
 }
 
-.my-jumbotron {
+.my-jumbotron{
     background: url("http://www.mwyking.com:8888/img/bg001.jpg") no-repeat;
     -webkit-background-size:cover;
     background-size:cover;
+}
+
+.chat-content{
+    padding: 20px;
+    background-color: #fff;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
 }
 
 .editor-div {
@@ -58,34 +66,14 @@ body {
     height: 20px;
 }
 
-/*返回顶部图标*/
-.back-top {
+.chat-history{
     display: none;
-    z-index: 999999;
-    width: 45px;
-    height: 45px;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #777;
-    color: #eee;
-    font-size: 24px;
-    line-height: 2;
-    text-align: center;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    text-decoration: none;
-    overflow: hidden;
-    border: none;
-    opacity: .8;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #fff;
 }
 
-.back-top:hover {
-    background-color: #333;
-    color: #fff;
+.chat-history-title{
+    margin: 10px 0;
 }
 
-.back-top:active, .back-top:focus {
-    color: #fff;
-}

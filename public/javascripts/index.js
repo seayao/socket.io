@@ -41,4 +41,16 @@ $(document).ready(function () {
             return false;
         });
     });
+
+    //点击扫码
+    $(".scan-log").click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(".web-code-div").fadeToggle("fast");
+    });
+
+    //全屏检测二维码如存在则点击消失
+    $(window).click(function(){
+        $(".web-code-div").fadeOut("fast");
+    });
 });
